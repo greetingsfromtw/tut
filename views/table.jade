@@ -1,0 +1,39 @@
+extends ./layout.jade
+
+block styles
+	style.
+		table,th,td{
+		border:1px solid black;
+		}
+		th,td{
+		padding:8px
+		}
+
+block content
+	br
+	br
+	h3= title
+	p table1
+	table
+		tr
+			th name
+			th(colspan="2") number
+			
+		tr
+			td 
+				a(href="https://www.google.com.tw" target="blank") Google
+			td 123-4567
+			td 7654-321
+	p table2
+	table
+		tr
+			th name
+			td 
+				a(href="https://www.google.com.tw" target="blank") Google
+		tr
+			th(rowspan="2") hobby
+			td coding
+		tr
+			td running(code)
+
+

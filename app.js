@@ -7,12 +7,16 @@ app.set('view engine','jade');
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/route',function(req,res){
-	res.send('this is a route');
+app.get('/main',function(req,res){
+	res.render('main',{title:'main page'});
 })
 
-app.get('/hello',function(req,res){
-	res.render('hello');
+app.get('/loop',function(req,res){
+	res.render('loop',{title:'loop testing'});
+})
+
+app.get('/table',function(req,res){
+	res.render('table',{title:'table testing'});
 })
 
 app.listen(3000);

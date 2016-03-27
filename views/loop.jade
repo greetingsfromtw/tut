@@ -1,0 +1,22 @@
+extends ./layout.jade
+
+block content
+	br
+	br
+	h3= title
+
+	ul
+	-var arr1=[1,2,3,4,5]
+		for val in arr1
+			li=val
+
+	ul
+	-var arr2 = ['Anna','Mary','Jane','Bob','Doe']
+		for val,index in arr2
+			li=index+':'+val
+	ul
+	-var obj1 = {bookName:' somebook2016',price:' $135',amount:12}
+		for val, index in obj1
+			li= index + ':' + val
+
+

@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		title= title
+		meta(charset = 'utf-8')
+
+		style.
+			.left{
+				float: left;
+				margin: 5px;
+			}
+		block styles
+
+	body
+		h2= 'Hello Template'
+
+		div.left
+			a(href='/main') main		
+		div.left
+			a(href='/table') table
+		div.left
+			a(href='/loop') loop
+	
+		block content
+
+
