@@ -3,14 +3,20 @@ extends ./layout.jade
 block content
 	br
 	br
-	
+	-var fruit= 'pineapple'
+	-var flavor= 'very sweet'
 	h3= title
-	form(action="/output" method = "POST")
+	form(action="/output?fruit=#{fruit}&flavor=#{flavor}" method = "POST")
 		label() 使用者名稱：
+		br
 		input(type="text" name="username")
 		br
 
 		label() 密碼：
+		br
 		input(type="password" name="pwd")
 		br
-		input(type="submit" value ="測試表單")
+		input(type="submit" value ="測試")
+
+
+
