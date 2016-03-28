@@ -41,25 +41,31 @@ app.use(cookieSession({
 
 
 app.get('/main',function(req,res){
+	res.locals.logined= req.session.logined;
 	res.render('main',{title:'main page'});
 })
 
 app.get('/table',function(req,res){
+	res.locals.logined= req.session.logined;
 	res.render('table',{title:'table testing'});
 })
 
 app.get('/loop',function(req,res){
+	res.locals.logined= req.session.logined;
 	res.render('loop',{title:'loop testing'});
 })
 
 app.get('/list',function(req,res){
+	res.locals.logined= req.session.logined;
 	res.render('list',{title:'list testing'});
 })
 
 app.get('/form',function(req,res){
+	res.locals.logined= req.session.logined;
 	res.render('form',{title:'form testing'});
 })
 app.post('/output',function(req,res){
+	res.locals.logined= req.session.logined;
 	console.log(req.body.username);
 	console.log(req.body.pwd);
 	res.render('output',{
@@ -71,9 +77,29 @@ app.post('/output',function(req,res){
 		});
 });
 
+app.get('/login',function(req,res){
+	if(req.session.logined){
+		res.redirect('main')
+	}
 
+	res.render('login');
+})
 
+app.post('/login_check',function(req,res){
+	if(req.body.accountname!='admin' || req.body.accountpwd!='123'){
+		res.render('login',{
+			error:'帳號密碼錯誤,請重新輸入'
+		});
+	}
+	req.session.logined= true;
+	res.redirect('/main');
+})
 
+app.get('/logout',function(req,res){
+	req.session.logined= false;
+	res.locals.logined= req.session.logined;
+	res.redirect('main');
+})
 
 
 //測試QueryString
