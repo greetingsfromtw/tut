@@ -21,25 +21,27 @@ html
 			div(style='marin:20px') Hello,Admin
 			div
 				a(href='/logout') logout
-		else
-			div
-				a(href='/login') login
 
-		br
+				br
 
-		div.left
-			a(href='/main') main		
-		div.left
-			a(href='/jQueryTest') jQueryTesting
-		div.left
-			a(href='/table') table
-		div.left
-			a(href='/loop') loop
-		div.left
-			a(href='/list') list
-		div.left
-			a(href='/form') form
+			div.left
+				a(href='/main') main		
+			div.left
+				a(href='/jQueryTest') jQueryTesting
+			div.left
+				a(href='/table') table
+			div.left
+				a(href='/loop') loop
+			div.left
+				a(href='/list') list
+			div.left
+				a(href='/form') form
 	
+		else
+			div(style='marin:20px') Please login to continue.
+
+
+
 		block content
 
 

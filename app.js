@@ -16,9 +16,6 @@ app.use(bodyParser.urlencoded({
 	extended:false
 }));
 
-//啟用cookie解析器
-app.use(cookieParser());
-
 /*
 //啟用集中式session.當中的secret是用來加密cookie以防被破解
 //缺點:儲存在記憶體中,伺服器重啟後資料就會消失
@@ -29,14 +26,14 @@ app.use(session({
 }));
 */
 
+//啟用cookie解析器
+app.use(cookieParser());
 
 //啟用cookie session
 app.use(cookieSession({
 	key:'node',
 	secret:'hicookieSession'
 }));
-
-
 
 
 app.get('/main',function(req,res){
@@ -121,7 +118,6 @@ app.post('/login_check',function(req,res){
 	res.redirect('/main');
 })
 
-
 app.get('/logout',function(req,res){
 	req.session.logined= false;
 	res.locals.logined= req.session.logined;
@@ -146,7 +142,7 @@ app.get('/mydir/:name',function(req,res){
 
 /*
 //集中式session實作
-//測試時將集中式session的middleware反註解
+
 
 app.get('/mysession',function(req,res){
 	
