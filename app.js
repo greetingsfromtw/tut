@@ -27,11 +27,10 @@ app.use(session({
 	resave: true,
     saveUninitialized: true
 }));
-
 */
 
-//啟用cookie session
 
+//啟用cookie session
 app.use(cookieSession({
 	key:'node',
 	secret:'hicookieSession'
@@ -70,8 +69,6 @@ app.post('/output',function(req,res){
 		flavor:req.query.flavor
 		});
 });
-
-
 
 
 
