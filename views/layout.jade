@@ -14,6 +14,15 @@ html
 	body
 		h2= 'Hello Template'
 
+		br.left
+		if (logined)
+			div(style='marin:20px') Admin
+			div
+				a(href='/logout') logout
+		else
+			div
+				a(href='/login') login
+		br.left				
 		div.left
 			a(href='/main') main		
 		div.left
@@ -24,8 +33,6 @@ html
 			a(href='/list') list
 		div.left
 			a(href='/form') form
-		div.left
-			a(href='/login') login
 	
 		block content
 
