@@ -1,11 +1,19 @@
+require('./lib/db');
+var mongoose = require('mongoose');
+var todoDB = mongoose.model('todoDB');
 var express = require('express');
-var app = express();
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
 var bodyParser=require('body-parser');
 var cookieParser=require('cookie-parser');
 //var session = require('express-session');
 var cookieSession = require('cookie-session');
 //設定jade為預設render引擎
-app.set('views',__dirname + '/views');
+
+var app = express();
+
+app.set('views',path.join(__dirname, 'views'));
 app.set('view engine','jade');
 
 //設定靜態網頁路徑
@@ -34,6 +42,31 @@ app.use(cookieSession({
 	key:'node',
 	secret:'hicookieSession'
 }));
+
+app.get('/todo',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
+	res.locals.logined= req.session.logined;
+        res.render( 'todo',{
+        	title:'todo list testing',
+    	})
+	
+})
+
+app.post('/add',function(req,res){
+	todoDB.create({
+		content:req.body.add
+	})
+	res.locals.logined= req.session.logined;
+	todoDB.find(function ( err, todos, count ){
+        res.render( 'todo',{
+        	title:'todo list testing',
+        	todos:todos
+    	})
+    })	
+})
+
 
 
 app.get('/main',function(req,res){
