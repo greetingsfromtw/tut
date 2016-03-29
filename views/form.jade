@@ -1,5 +1,27 @@
 extends ./layout.jade
 
+block script
+	script.
+		$(document).ready(function(){
+			(function( $ ){
+			$("#langSelect").change(function(){
+				if($('#langSelect option:selected').val()== "none"){
+					$("#else1").show();
+					$("#else2").show();				
+				}else if($('#langSelect option:selected').val()!== "none"){
+					$("#else1").hide();
+					$("#else2").hide();				
+
+				}
+
+				
+			});
+
+			})(jQuery)
+		});
+
+
+
 block content
 	br
 	br
@@ -7,16 +29,30 @@ block content
 	-var flavor= 'very sweet'
 	h3= title
 	form(action="/output?fruit=#{fruit}&flavor=#{flavor}" method = "POST")
-		label() 使用者名稱：
+		label() 請輸入姓名：
 		br
-		input(type="text" name="username")
+		input(type="text" name="name") 
+		label #{blankName}
+
 		br
 
-		label() 密碼：
+		label() 您最喜歡的語言是：
 		br
-		input(type="password" name="pwd")
+		select(id='langSelect' name="lang")
+			option(value="台語") 台語
+			option(value="法語") 法語
+			option(value="德語") 德語
+			option(value="日語") 日語
+			option(value="英語") 英語
+			option(value="none") 其它
+
 		br
-		input(type="submit" value ="測試")
+		p(id='else1' style='display:none') 請輸入其他喜歡的語言:
+		input(id='else2' style='display:none' name="otherLang")
+		br
+		input(type="submit" value ="提交")
+
+
 
 
 

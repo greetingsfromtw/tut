@@ -40,37 +40,65 @@ app.use(cookieSession({
 
 
 app.get('/main',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
+
 	res.locals.logined= req.session.logined;
 	res.render('main',{title:'main page'});
 })
 
+app.get('/jQueryTest',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
+	res.locals.logined= req.session.logined;
+	res.render('jQueryTest',{title:'jQuery Testing'});
+})
+
 app.get('/table',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
 	res.locals.logined= req.session.logined;
 	res.render('table',{title:'table testing'});
 })
 
 app.get('/loop',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
 	res.locals.logined= req.session.logined;
 	res.render('loop',{title:'loop testing'});
-})
+});
 
 app.get('/list',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
 	res.locals.logined= req.session.logined;
 	res.render('list',{title:'list testing'});
-})
+});
 
 app.get('/form',function(req,res){
+	if(!req.session.logined){
+		res.redirect('login')
+	}
 	res.locals.logined= req.session.logined;
 	res.render('form',{title:'form testing'});
-})
+});
 app.post('/output',function(req,res){
 	res.locals.logined= req.session.logined;
-	console.log(req.body.username);
-	console.log(req.body.pwd);
+	if(req.body.name.replace(/\s+/g, '').length == 0){
+		res.render('form',{
+			title:'form testing(error)',
+			blankName:' Sorry,名字請勿留白.'});
+	}
 	res.render('output',{
 		title:'form testing(output)',
-		username:req.body.username,
-		pwd:req.body.pwd,
+		name:req.body.name,
+		lang:req.body.lang,
+		otherLang:req.body.otherLang,		
 		fruit:req.query.fruit,
 		flavor:req.query.flavor
 		});
@@ -80,7 +108,6 @@ app.get('/login',function(req,res){
 	if(req.session.logined){
 		res.redirect('main')
 	}
-
 	res.render('login');
 })
 

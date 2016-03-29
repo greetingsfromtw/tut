@@ -6,13 +6,20 @@ block content
 	
 	h3= title
 
+	if lang!=='none'
+		-var getLang= lang
+	else
+		-var getLang= otherLang
+
 	//POST方法測試:從表單(form.jade)中取值
-	p Greetings, #{username}		
-	p your password is: #{pwd}
+	p 歡迎, #{name}		
+	p 聽說您最喜歡的語言是: #{getLang}
+
 	hr
 
 
 	//QueryString方法測試:從網址中的鍵值中取值
+	p *以下為QueryString取值測試
 	p fruit: #{fruit}
 	p flavor: #{flavor}
 
