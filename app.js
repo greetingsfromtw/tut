@@ -89,7 +89,8 @@ app.post('/output',function(req,res){
 	if(req.body.name.replace(/\s+/g, '').length == 0){
 		res.render('form',{
 			title:'form testing(error)',
-			blankName:' Sorry,名字請勿留白.'});
+			blankName:' Sorry,名字請勿留白.'
+		});
 	}
 	res.render('output',{
 		title:'form testing(output)',
@@ -105,13 +106,18 @@ app.get('/login',function(req,res){
 	if(req.session.logined){
 		res.redirect('main')
 	}
-	res.render('login');
+	res.render('login',{
+			errorname:''		
+	});
 })
 
 app.post('/login_check',function(req,res){
 	if(req.body.accountname!='admin' || req.body.accountpwd!='123'){
+		var a= req.body.accountname;
+		var b= req.body.accountpwd;
 		res.render('login',{
-			error:'帳號密碼錯誤,請重新輸入'
+			errorname:a,
+			errormsg:'*帳號密碼錯誤,請重新輸入'
 		});
 	}
 	req.session.logined= true;

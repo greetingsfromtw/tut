@@ -2,19 +2,13 @@ extends ./layout.jade
 
 block content
 	br
-	br
-
-
-	
+	br	
 	h3='使用者登入'
-	
-
-	
 
 	form(action="/login_check" method = "POST")
 		label() 帳號：
 		br
-		input(type="text" name="accountname")
+		input(type="text" name="accountname" value="#{errorname}")
 		br
 
 		label() 密碼：
@@ -23,7 +17,7 @@ block content
 		br
 		input(type="submit" value ="登入")
 
-	label #{error}
+	label #{errormsg}
 
 
 	

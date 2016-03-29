@@ -16,14 +16,10 @@ html
 	body
 		h2= 'Hello Template'
 
-		br.left
 		if (logined)
-			div(style='marin:20px') Hello,Admin
-			div
-				a(href='/logout') logout
-
-				br
-
+			div(style='marin:30px') 歡迎,Admin
+				a(href='/logout' style='padding:10px') logout
+			br
 			div.left
 				a(href='/main') main		
 			div.left
@@ -36,11 +32,8 @@ html
 				a(href='/list') list
 			div.left
 				a(href='/form') form
-	
 		else
 			div(style='marin:20px') Please login to continue.
-
-
 
 		block content
 

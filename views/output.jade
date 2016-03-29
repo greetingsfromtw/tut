@@ -3,7 +3,6 @@ extends ./layout.jade
 block content
 	br
 	br
-	
 	h3= title
 
 	if lang!=='none'
@@ -12,8 +11,8 @@ block content
 		-var getLang= otherLang
 
 	//POST方法測試:從表單(form.jade)中取值
-	p 歡迎, #{name}		
-	p 聽說您最喜歡的語言是: #{getLang}
+	p 您好, #{name}	,	
+	p 聽說您最喜歡的語言是: #{getLang} ,對吧?
 
 	hr
 

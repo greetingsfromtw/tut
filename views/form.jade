@@ -2,25 +2,19 @@ extends ./layout.jade
 
 block script
 	script.
-		$(document).ready(function(){
-			(function( $ ){
+		(function( $ ){
+			$(document).ready(function(){
 			$("#langSelect").change(function(){
-				if($('#langSelect option:selected').val()== "none"){
-					$("#else1").show();
-					$("#else2").show();				
-				}else if($('#langSelect option:selected').val()!== "none"){
-					$("#else1").hide();
-					$("#else2").hide();				
-
-				}
-
-				
+					if($('#langSelect option:selected').val()== "none"){
+						$("#else1").show();
+						$("#else2").show();				
+					}else if($('#langSelect option:selected').val()!== "none"){
+						$("#else1").hide();
+						$("#else2").hide();				
+					}				
+				});
 			});
-
-			})(jQuery)
-		});
-
-
+		})(jQuery)
 
 block content
 	br
@@ -45,8 +39,9 @@ block content
 			option(value="日語") 日語
 			option(value="英語") 英語
 			option(value="none") 其它
-
+		
 		br
+		
 		p(id='else1' style='display:none') 請輸入其他喜歡的語言:
 		input(id='else2' style='display:none' name="otherLang")
 		br

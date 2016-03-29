@@ -2,20 +2,17 @@ extends ./layout.jade
 
 block script
 	script.
-		$(document).ready(function(){
-			$("#toggle").click(function(){
-			$("#test").toggle();
+		(function( $ ){
+			$(document).ready(function(){
+				$("#toggle").click(function(){
+					$("#test").toggle();
+				});	
 			});
-		});
+		})(jQuery)
 
 block content
 	br
 	br
-
 	h3= title
-	
-
 	button#toggle Click me
-
-
 	p#test Click on the button above to see the effect.
