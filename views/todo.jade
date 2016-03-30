@@ -3,11 +3,19 @@ extends ./layout.jade
 
 block content
 	br
+	br
 	h3= title	
+	
 	form(action="/add" method = "POST")
 		br
 		input(type="text" name="add") 
-		input(type="submit" value ="新增")
 
-	for todo in todos
-		div= todo.content
+
+
+	for i in todos
+		div=i.content
+		div
+			a(href="/delete/"+i.id) del
+		br
+
+

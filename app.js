@@ -1,3 +1,7 @@
+//若用router方式使用mongoose,
+//則寫:
+//require('../lib/db');
+//注意有多一個"."
 require('./lib/db');
 var mongoose = require('mongoose');
 var todoDB = mongoose.model('todoDB');
@@ -7,12 +11,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser=require('body-parser');
 var cookieParser=require('cookie-parser');
-//var session = require('express-session');
 var cookieSession = require('cookie-session');
-//設定jade為預設render引擎
+
 
 var app = express();
 
+//設定jade為預設render引擎
 app.set('views',path.join(__dirname, 'views'));
 app.set('view engine','jade');
 
@@ -24,15 +28,6 @@ app.use(bodyParser.urlencoded({
 	extended:false
 }));
 
-/*
-//啟用集中式session.當中的secret是用來加密cookie以防被破解
-//缺點:儲存在記憶體中,伺服器重啟後資料就會消失
-app.use(session({
-	secret:'helloSession',
-	resave: true,
-    saveUninitialized: true
-}));
-*/
 
 //啟用cookie解析器
 app.use(cookieParser());
@@ -48,9 +43,9 @@ app.get('/todo',function(req,res){
 		res.redirect('login')
 	}
 	res.locals.logined= req.session.logined;
-        res.render( 'todo',{
-        	title:'todo list testing',
-    	})
+			res.render( 'todo',{
+			title:'todo list testing',
+		})
 	
 })
 
@@ -60,14 +55,28 @@ app.post('/add',function(req,res){
 	})
 	res.locals.logined= req.session.logined;
 	todoDB.find(function ( err, todos, count ){
-        res.render( 'todo',{
-        	title:'todo list testing',
-        	todos:todos
-    	})
-    })	
+	res.render( 'todo',{
+			title:'todo list testing',
+			todos:todos
+		})
+	})	
 })
 
-
+app.get('/delete/:id', function(req, res, next) {
+    todoDB.remove({ _id: req.params.id }, function(err) {
+        if (err)
+            console.log('Fail to delete article.');
+        else
+            console.log('Done');
+    });
+    res.locals.logined= req.session.logined;
+	todoDB.find(function ( err, todos, count ){
+	res.render( 'todo',{
+			title:'todo list testing',
+			todos:todos
+		})
+	})	
+})
 
 app.get('/main',function(req,res){
 	if(!req.session.logined){
@@ -179,28 +188,7 @@ app.get('/mydir/:name',function(req,res){
 	res.send('Name: '+req.params.name);
 })
 
-/*
-//集中式session實作
 
-
-app.get('/mysession',function(req,res){
-	
-	//檢查session裡的count是否存在
-	if(req.session.count){
-		
-		//將count加一
-		req.session.count++;
-	}else{
-
-		//將count初始值設為一
-		req.session.count=1;
-	}
-
-	//將目前count欄位內的值傳回給瀏覽器
-	res.sendStatus(req.session.count);
-	res.end();
-});
-*/
 
 app.listen(3000);
 console.log('port listening at port 3000');
