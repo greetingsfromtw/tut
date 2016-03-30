@@ -15,7 +15,12 @@ block content
 
 	for todo,index in todos.reverse()
 		div
-			input(value=todo.content id='getcontent' readonly)
+		if todo.id == getid
+			form(action='/update/'+todo.id method='POST')
+				input(type='text' name='getcontent' value=todo.content)
+				button(type='submit') save
+		else
+			input(value=todo.content readonly)
 			a(href='/delete/'+todo.id style='margin:10px;') del
 			a(href='/edit/'+todo.id style='margin:5px;') edit
 

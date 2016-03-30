@@ -43,11 +43,15 @@ app.get('/todo',function(req,res){
 		res.redirect('login')
 	}
 	res.locals.logined= req.session.logined;
-			res.render( 'todo',{
+	todoDB.find(function ( err, todos, count ){
+	res.render( 'todo',{
 			title:'todo list testing',
+			todos:todos
 		})
-	
+	})
 })
+	
+
 
 app.post('/add',function(req,res){
 	todoDB.create({
@@ -77,6 +81,37 @@ app.get('/delete/:id', function(req, res, next) {
 		})
 	})	
 })
+
+app.get('/edit/:id', function(req, res, next) {
+	res.locals.logined= req.session.logined;
+	todoDB.find({ _id: req.params.id }, function ( err, todos, count ){
+		res.render( 'edit', {
+ 			title:'todo list testing',
+			todos:todos,
+			getid:req.params.id
+		});
+	});		
+});
+
+app.post('/update/:id', function(req, res, next) {
+    todoDB.update({ _id: req.params.id }, { content: req.body.getcontent }, function(err) {
+        if (err)
+            console.log('Fail to update content.');
+        else
+            console.log('Done');
+    })
+    res.locals.logined= req.session.logined;
+    todoDB.find(function ( err, todos, count ){
+	res.render( 'todo',{
+			title:'todo list testing',
+			todos:todos
+		})
+	})	 
+});
+
+
+
+
 
 app.get('/main',function(req,res){
 	if(!req.session.logined){
